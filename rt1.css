@@ -1,0 +1,1030 @@
+       
+       :root {
+        --primary-color: #0066AE;
+        --primary-dark: #005291;
+        --primary-light: #E6F3FF;
+        --background-color: #F5F5F5;
+        --header-height: 60px;
+        --sidebar-width: 250px;
+        --sidebar-collapsed-width: 60px;
+    }
+
+                /* CSS untuk tampilan mobile */
+        @media (max-width: 767px) {
+            .mobile-only {
+                display: block;
+                width: 100%;
+                background-color: inherit;
+            }
+        }
+
+        /* CSS untuk tampilan desktop */
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none;
+            }
+        }
+
+    body {
+        background-color: var(--background-color);
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins';
+        line-height: 1.2;
+        font-size: 14px;
+        padding-left: var(--sidebar-width);
+        transition: padding-left 0.3s;
+    }
+
+    .header-container {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: var(--sidebar-width);
+        z-index: 1000;
+        background-color: var(--primary-color);
+        height: var(--header-height);
+        transition: left 0.3s;
+        display: flex;
+        align-items: center;
+    }
+    @media (max-width: 767px) {
+        .card-container {
+            position: fixed;
+            border-radius: 15px;
+            top: calc(var(--header-height) - 10px);
+            right: 0;
+            left: 0;
+            z-index: 1000;
+            overflow-y: auto;
+            background-color: inherit;
+            height: 100%;
+            transition: left 0.3s;
+            align-items: center;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .card-container {
+            width: calc(100vw - var(--sidebar-width));
+            margin-left: var(--sidebar-width);
+        }
+    }
+    .dropdown-menu {
+        display: none; /* Sembunyikan menu secara default */
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    
+    .dropdown-item {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    
+    .dropdown-item:hover {
+        background-color: #f1f1f1;
+    }
+    
+    /* Tambahkan CSS untuk menampilkan menu saat dropdown-toggle di-hover */
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+    .whatsapp-text {
+        font-size: 9px;
+        font-style: italic;
+    }
+ 
+    @media (max-width: 767px) {
+        .whatsapp-text {
+            font-size: 6px;
+        }
+    }
+    .user-greeting {
+        background-color: var(--background-color);
+        margin-bottom: 20px;
+        margin-left: 5px;
+        
+    }
+
+    .user-greeting h2 {
+        font-size: 1em;
+        margin: 0;
+        font-weight: normal;
+    }
+
+    .user-greeting h1 {
+        font-size: 1em;
+        margin: 5px 0;
+        font-weight: bold;
+    }
+
+    .user-greeting p {
+        font-size: 0.9em;
+        margin: 5px 0;
+    }
+
+    .user-greeting i {
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: var(--sidebar-width);
+        height: 100vh;
+        background-color: var(--primary-color);
+        transition: width 0.3s;
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar-header {
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 15px;
+        background-color: var(--primary-dark);
+        color: white;
+    }
+
+    .sidebar-toggle {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .sidebar-menu {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding-top: 10px;
+    }
+
+    .sidebar-item {
+        padding: 15px 20px;
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar-item i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+    }
+
+    .main-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        color: white;
+        width: 100%;
+    }
+
+    /* .container {
+        padding-top: 0;
+        width: 100%;
+        min-height: calc(100vh - var(--header-height));
+        transition: margin-left 0.3s;
+    }
+
+    .content-wrapper {
+        padding: 15px;
+    } */
+
+    body.sidebar-collapsed {
+        padding-left: var(--sidebar-collapsed-width);
+    }
+
+    body.sidebar-collapsed .header-container {
+        left: var(--sidebar-collapsed-width);
+    }
+
+    body.sidebar-collapsed .sidebar {
+        width: var(--sidebar-collapsed-width);
+    }
+
+    body.sidebar-collapsed .sidebar-header {
+        justify-content: center;
+        padding: 0;
+    }
+
+    body.sidebar-collapsed .sidebar-header span {
+        display: none;
+    }
+
+    body.sidebar-collapsed .sidebar-toggle {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    body.sidebar-collapsed .sidebar-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+    }
+
+    body.sidebar-collapsed .sidebar-item {
+        width: var(--sidebar-collapsed-width);
+        height: 50px; /* Sesuaikan tinggi ini sesuai kebutuhan */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    body.sidebar-collapsed .sidebar-item span {
+        display: none;
+    }
+
+    body.sidebar-collapsed .sidebar-item i {
+        margin: 0;
+        font-size: 18px; /* Sesuaikan ukuran font ikon jika perlu */
+    }
+    
+    @media (max-width: 767px) {
+        body {
+            padding-left: 0;
+        }
+
+        .header-container {
+            left: 0;
+        }
+
+        .sidebar {
+            transform: translateX(-100%);
+        }
+
+        body.sidebar-active .sidebar {
+            transform: translateX(0);
+        }
+    }
+
+    .balance-header {
+background-color: white;
+border-radius: 15px;
+padding: 20px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+margin-bottom: 20px;
+}
+
+.account-info {
+display: flex;
+justify-content: space-between;
+align-items: center;
+color: #666;
+font-size: 0.9em;
+margin-bottom: 10px;
+}
+
+.balance {
+display: flex;
+font-family: 'Inter';
+align-items: center;
+margin-bottom: 15px;
+}
+
+.currency {
+font-size: 1.2em;
+color: #333;
+margin-right: 10px;
+}
+
+.nominalsaldo {
+font-size: 1.5em;
+font-weight: bold;
+color: #333;
+}
+
+.balance .fas.fa-eye {
+margin-left: auto;
+color: #666;
+cursor: pointer;
+}
+
+.promo-banner {
+background-color: #0066AE;
+color: white;
+padding: 10px 15px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.bca-logo {
+width: 30px;
+height: auto;
+margin-right: 10px;
+}
+
+.cta {
+font-weight: bold;
+}
+
+.fas.fa-chevron-right {
+font-size: 0.8em;
+margin-left: 5px;
+}
+    .menu-grid {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+        margin-bottom: 30px; /* Menambahkan margin bottom untuk memberikan jarak setelah menu grid */
+    }
+    .menu-item {
+        background-color: white;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+    .menu-item-whatsapp {
+        background-color: #25D366;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+    .menu-item:hover {
+        transform: translateY(-5px);
+        background-color: var(--primary-light);
+    }
+    .menu-icon {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+    }
+    .menu-text {
+        font-weight: 700; /* Bold */
+        font-size: 14px; /* Menyesuaikan ukuran font jika diperlukan */
+    }
+    .menu-subtext {
+        font-size: 14px; /* Menaikkan dari 14px menjadi 15px */
+        font-weight: 400;
+    }
+    .menu-subtext .amount {
+        font-weight: 700; /* Bold */
+        font-family: 'Inter';
+        font-size: 16px; /* Menaikkan dari 15px menjadi 16px */
+    }
+    .quick-actions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 20px;
+        gap: 10px;
+    }
+    .action-button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .action-button:hover {
+        background-color: var(--primary-dark);
+    }
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to bottom, #0e84d8, #005291);
+        color: white;
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        height: 60px; /* Meningkatkan tinggi footer */
+        z-index: 1000; /* Memastikan footer selalu di atas konten lain */
+    }
+    .footer-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+        justify-content: center;
+        height: 100%;
+    }
+    .footer-icon {
+        font-size: 22px; /* Meningkatkan ukuran ikon */
+        margin-bottom: 4px; /* Meningkatkan jarak antara ikon dan teks */
+    }
+    .footer-text {
+        font-size: 12px; /* Meningkatkan ukuran teks */
+        font-weight: 500;
+    }
+    @media (min-width: 768px) {
+        .footer {
+            display: none; /* Menyembunyikan footer pada tampilan desktop */
+        }
+        body {
+            padding-bottom: 0; /* Menghilangkan padding bawah pada tampilan desktop */
+        }
+    }
+    .hamburger {
+        display: none;
+    }
+    .sidebar {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        body {
+            display: flex;
+        }
+        .sidebar {
+            display: flex;
+            width: 200px;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            flex-direction: column;
+            justify-content: flex-start;
+            z-index: 1001;
+            transition: width 0.3s ease;
+            overflow: hidden;
+        }
+        .sidebar-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0 15px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+        .sidebar-content {
+            padding-top: 20px;
+        }
+        .sidebar.minimized {
+            width: 60px;
+        }
+        .sidebar.minimized .sidebar-text,
+        .sidebar.minimized .logo-text {
+            display: none;
+        }
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            font-size: 1.5em;
+            background: none;
+            border: none;
+            color: white;
+        }
+        .container {
+            margin-left: 0;
+            padding-top: 80px;
+            z-index: 1000;
+            transition: all 0.3s;
+            flex: 1;
+            max-width: 800px; /* Tidak ada perubahan lainnya selain ini */
+        }
+        body.sidebar-minimized .container {
+            margin-left: 60px;
+            min-width: calc(100% - 60px);
+        }
+        .top-header {
+            position: fixed;
+            top: 0;
+            left: 200px; /* Sesuaikan dengan lebar sidebar */
+            right: 0;
+            transition: left 0.3s ease;
+        }
+        body.sidebar-minimized .top-header {
+            left: 60px;
+        }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .sidebar-item:hover {
+            background-color: var(--primary-light);
+        }
+        .sidebar-icon {
+            width: 20px;
+            text-align: center;
+            margin-right: 12px;
+        }
+        .sidebar-text {
+            transition: opacity 0.3s ease;
+        }
+        .sidebar.minimized .sidebar-text {
+            opacity: 0;
+        }
+        .menu-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .quick-actions {
+            width: 100%;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        .action-button {
+            margin-right: 10px;
+        }
+        .footer {
+            display: none;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .container {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .menu-grid {
+            grid-template-columns: repeat(6, 1fr);
+        }
+    }
+
+    .org-chart {
+        width: 100%;
+        margin-top: 40px;
+        text-align: center;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .org-chart ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        position: relative;
+    }
+
+    .org-chart li {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .org-chart .level-0,
+    .org-chart .level-1,
+    .org-chart .level-2,
+    .org-chart .level-3 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .org-chart .level-0,
+    .org-chart .level-1,
+    .org-chart .level-2 {
+        margin-bottom: 40px;
+    }
+
+    .org-chart .level-0 > li,
+    .org-chart .level-1 > li {
+        width: 200px;
+        margin: 0 20px;
+    }
+
+    .org-chart .level-1 > li {
+        width: 240px;
+    }
+
+    .org-chart .level-2 > li,
+    .org-chart .level-3 > li {
+        width: 180px;
+        margin: 10px;
+    }
+
+    .org-chart .position {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .org-chart .photo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 15px;
+        border: 3px solid var(--primary-color);
+    }
+
+    .org-chart .level-1 .photo {
+        width: 160px;
+        height: 160px;
+    }
+
+    .org-chart .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .org-chart .name {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .org-chart .title {
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Garis penghubung */
+    .org-chart .level-1::before,
+    .org-chart .level-2::before,
+    .org-chart .level-3::before {
+        content: '';
+        position: absolute;
+        top: -40px;
+        left: 50%;
+        border-left: 2px solid var(--primary-color);
+        height: 40px;
+    }
+
+    .org-chart .level-2::after,
+    .org-chart .level-3::after {
+        content: '';
+        position: absolute;
+        top: -40px;
+        left: 10%;
+        right: 10%;
+        border-top: 2px solid var(--primary-color);
+    }
+
+    /* Media queries */
+    @media (min-width: 768px) {
+        .org-chart .level-2 {
+            flex-wrap: nowrap;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .org-chart .level-2,
+        .org-chart .level-3 {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .org-chart {
+            padding: 0 10px;
+        }
+
+        .org-chart .level-0 {
+            flex-wrap: nowrap;
+        }
+
+        .org-chart .level-1,
+        .org-chart .level-2,
+        .org-chart .level-3 {
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .org-chart .level-0 > li,
+        .org-chart .level-1 > li,
+        .org-chart .level-2 > li,
+        .org-chart .level-3 > li {
+            width: calc(50% - 20px);
+            margin: 10px;
+        }
+
+        .org-chart .level-1 .photo {
+            width: 120px;
+            height: 120px;
+        }
+
+        .org-chart .name {
+            font-size: 14px;
+        }
+
+        .org-chart .title {
+            font-size: 12px;
+        }
+
+        .org-chart .level-1::before,
+        .org-chart .level-2::before,
+        .org-chart .level-3::before,
+        .org-chart .level-2::after,
+        .org-chart .level-3::after {
+            display: none;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .sidebar {
+            transition: width 0.3s ease;
+        }
+
+        .sidebar-header {
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-icon {
+            width: 20px;
+            text-align: center;
+            margin-right: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-text {
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.minimized {
+            width: 60px;
+        }
+
+        .sidebar.minimized .sidebar-header {
+            justify-content: center;
+            padding: 0;
+        }
+
+        .sidebar.minimized .logo-text {
+            display: none;
+        }
+
+        .sidebar.minimized .hamburger {
+            margin: 0;
+        }
+
+        .sidebar.minimized .sidebar-item {
+            justify-content: center;
+            padding: 12px 0;
+        }
+
+        .sidebar.minimized .sidebar-icon {
+            margin-right: 0;
+        }
+
+        .sidebar.minimized .sidebar-text {
+            display: none;
+        }
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 20px;
+        margin-bottom: 30px; 
+    }
+
+    .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .btn-lengkap {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute;
+    top: 18px;
+    right: 10px;
+}
+
+        .btn-lengkap:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .transaction-history {
+            position: relative; /* Untuk memungkinkan positioning absolut pada tombol jika diperlukan */
+        }
+    @media (max-width: 767px) {
+        .top-header .logo {
+            font-size: 1.1em; 
+            font-weight: 700 !important; 
+        }
+
+        .header-icons i {
+            margin-left: 10px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .top-header .logo {
+            margin-left: 200px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .top-header.sidebar-minimized .logo {
+            margin-left: 60px;
+        }
+    }
+
+    .transaction-history {
+        margin-bottom: 20px;
+    }
+
+    .transaction-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .transaction-item:last-child {
+        border-bottom: none;
+    }
+
+    .transaction-info {
+        display: flex;
+        align-items: center;
+    }
+
+    
+
+    .transaction-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        background-color: var(--primary-light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        overflow: hidden;
+    }
+
+    .transaction-icon i {
+        color: var(--primary-color);
+    }
+
+    .transaction-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .transaction-title {
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .transaction-date {
+        font-size: 0.8em;
+        color: #666;
+        font-weight: 400;
+    }
+
+    .transaction-account {
+        font-size: 0.8em;
+        color: #666;
+        font-weight: 700;
+        
+    }
+
+    .transaction-amount {
+        font-weight: 700; 
+        font-family: 'Inter';
+        font-size: 15px;
+    }
+
+    .transaction-amount.positive {
+        color: green;
+    }
+
+    .transaction-amount.negative {
+        color: orange;
+    }
+    .content-wrapper {
+        padding: 15px;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: var(--primary-light);
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        padding-top: 0px;
+        overflow-y: auto;
+    }
+
+    .sidebar-item {
+        padding: 10px 20px;
+        color: var(--primary-dark);
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.3s;
+    }
+
+    .sidebar-item:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    @media (min-width: 768px) {
+        body {
+            padding-left: 50px;
+        }
+
+        .container {
+            border-top-left-radius: 0;
+        }
+    }
+
+    
+    @media (min-width: 768px) {
+        /* ... (style desktop lainnya tetap sama) ... */
+
+        body.sidebar-collapsed .sidebar {
+            width: var(--sidebar-collapsed-width);
+        }
+
+        body.sidebar-collapsed .sidebar-header {
+            justify-content: center;
+            padding: 0;
+        }
+
+        body.sidebar-collapsed .sidebar-header span,
+        body.sidebar-collapsed .sidebar-item span {
+            display: none;
+        }
+
+        body.sidebar-collapsed .sidebar-item {
+            padding: 15px 0;
+            justify-content: center;
+        }
+
+        body.sidebar-collapsed .sidebar-item i {
+            margin-right: 0;
+        }
+
+        body.sidebar-collapsed .sidebar-toggle {
+            margin: 0;
+            width: var(--sidebar-collapsed-width);
+            justify-content: center;
+        }
+
+        body.sidebar-collapsed .sidebar-menu {
+            align-items: center;
+        }
+        
+    }
+

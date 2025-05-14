@@ -1,0 +1,472 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT 01 / RW 30 - KPA REGENCY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="rt1.css">
+    <link rel="stylesheet" href="laporan.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 12px;
+        }
+
+        .date-input, .text-input, .number-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .date-input:focus, .text-input:focus, .number-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .tab-menu {
+    display: flex;
+    border-bottom: 2px solid #007bff; /* Garis bawah untuk tab */
+}
+.tab-menu {
+    display: flex;
+    justify-content: space-between; /* Menempatkan tab di kiri dan kanan */
+    border-bottom: 2px solid #007bff; /* Garis bawah untuk tab */
+    margin-bottom: 15px; /* Jarak antara tab dan form */
+}
+
+.tab-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.tab-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.tab-item.active {
+    background-color: #0066AE; /* Warna latar belakang untuk tab aktif */
+    color: white; /* Warna teks untuk tab aktif */
+    border-radius: 4px 4px 0 0; /* Membulatkan sudut atas */
+}
+
+.tab-item:hover {
+    background-color: #0056b3; /* Warna latar belakang saat hover */
+    color: white; /* Warna teks saat hover */
+}
+
+/* Gaya untuk konten tab */
+.tab-content {
+    display: none; /* Sembunyikan konten tab secara default */
+}
+
+.tab-content.active {
+    display: block; /* Tampilkan konten tab yang aktif */
+}
+.input-row {
+    display: flex; /* Menggunakan flexbox untuk menempatkan input dalam satu baris */
+    align-items: center; /* Menjaga semua elemen dalam satu baris */
+}
+
+.input-row input {
+    flex: 1; /* Membuat input mengambil ruang yang sama */
+    margin-right: 0px; /* Jarak antara input */
+}
+
+.input-row input:last-child {
+    margin-right: 0; /* Menghapus margin kanan untuk input terakhir */
+}
+
+.select-input {
+    flex: 1; /* Membuat select mengambil ruang yang sama */
+    margin-right: 10px; /* Jarak antara select dan input berikutnya */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 14px;
+    color: #333;
+    appearance: none; /* Menghilangkan gaya default */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"><polygon points="0,0 10,0 5,5" fill="%23333"/></svg>'); /* Panah dropdown */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posisi panah */
+    background-size: 10px; /* Ukuran panah */
+    cursor: pointer; /* Kursor pointer saat hover */
+}
+
+.select-input:focus {
+    border-color: #007bff; /* Warna border saat fokus */
+    outline: none; /* Menghilangkan outline default */
+}
+
+.number-input {
+    flex: 1; /* Membuat input mengambil ruang yang sama */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px; /* Jarak antara select dan input */
+}
+
+.btn-submit {
+    background-color: #4CAF50; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol */
+    padding: 10px 15px; /* Padding tombol */
+    border: none; /* Menghilangkan border default */
+    border-radius: 4px; /* Membulatkan sudut tombol */
+    cursor: pointer; /* Kursor pointer saat hover */
+    margin-left: 10px; /* Jarak antara input dan tombol */
+}
+
+.year-button {
+    background-color: #f0f0f0; /* Warna latar belakang tombol */
+    color: #333; /* Warna teks tombol */
+    padding: 10px 15px; /* Padding tombol */
+    border: 1px solid #ccc; /* Border tombol */
+    border-radius: 10px; /* Membulatkan sudut tombol */
+    cursor: pointer; /* Kursor pointer saat hover */
+    margin-right: 10px; /* Jarak antara tombol */
+    transition: background-color 0.3s; /* Transisi untuk efek hover */
+}
+
+.year-button:hover {
+    background-color: #e0e0e0; /* Warna latar belakang saat hover */
+}
+
+.year-button.active {
+    background-color: #4CAF50; /* Warna latar belakang untuk tombol aktif */
+    color: white; /* Warna teks untuk tombol aktif */
+}
+
+.tombol-print{
+    white-space: nowrap;
+    margin-left: 50%;
+}
+@media (max-width: 768px) {
+    .tombol-print {
+        margin-left: 0; /* Aturan untuk tampilan mobile */
+    }
+}
+    </style>
+</head>
+<body>
+<div class="sidebar">
+        <div class="sidebar-header">
+            <span>Menu</span>
+            <button class="sidebar-toggle" id="sidebar-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="sidebar-menu">
+            <a href="warga.html" class="sidebar-item"><i class="fas fa-home"></i> <span>Beranda</span></a>
+                        <a href="laporan.html" class="sidebar-item"><i class="fas fa-chart-bar"></i> <span>Laporan</span></a>
+            <a href="#" class="sidebar-item"><i class="fas fa-cog"></i> <span>Pengaturan</span></a>
+            <!-- Tambahkan item menu lainnya sesuai kebutuhan -->
+        </div>
+    </div>
+
+    <div class="header-container">
+        <div class="main-header">
+            <div style="font-size: 20px; padding-bottom: 8px; font-weight: bold;">RT 01 / RW 30 - KPA REGENCY</div>
+            <div class="header-icons"> 
+                <a href="login.html" class="logout-btn" style="text-decoration: none; color: white;"><i class="fas fa-sign-out-alt"></i> logout</a>
+            </div>
+        </div>
+    </div>  
+<div class="card-container">
+<div class="container">
+    <div class="content-wrapper"> 
+        <div class="card transaction-history">
+         <div class="input-group">
+    <label for="tahun">PilihTahun</label>
+    <div class="input-row">
+        <button type="button" class="year-button active" data-year="2025" onclick="loadData(this)">
+            2025        </button> 
+        <div class="tombol-print" style="display: flex; justify-content: flex-end; ">
+            <a href="laporan1.php" class="responsive-button"><button type="submit" class="year-button">Per Bulan</button></a>
+            <form action="printtahun_lap.php" target="_blank" method="post" class="responsive-form">
+                <input type="hidden" name="tahun" id="tahun-input" value="2025">
+                <input type="hidden" name="namaBendahara" value="Tri Afandi">
+                <input type="hidden" name="whatsappBendahara" value="0819 0438 8602">
+                <input type="hidden" name="namaSarpras" value="Sukardi">
+                <input type="hidden" name="whatsappSarpras" value="0856 4166 3644">
+                <input type="hidden" name="namaSosial" value="Budi Haryanto">
+                <input type="hidden" name="whatsappSosial" value="0882 1543 1058">
+                <input type="hidden" name="namaKetuaRT" value="Sunu Aji Pramuji">    
+                <input type="hidden" name="whatsappKetuaRT" value="087876868828">
+                <button type="submit"  name="print" class="year-button">Download</button>
+            </form>
+        </div>
+    </div>
+</div>
+<hr style="margin-top: 20px; margin-bottom: 20px;">
+<div id="data-container">
+<div style="font-size: 12px; font-weight: bold; align-items: center;" class="card-title">Laporan Keuangan RT 01 / RW 30<br> Periode 2025    </div>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Tanggal</th>
+                <th>Keterangan</th>
+                <th style="text-align: center;">Uang Masuk</th>
+                <th style="text-align: center;">Uang Keluar</th>
+                <th style="text-align: center;">Saldo</th>
+                 
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                            <td colspan='4'><strong>Saldo Awal Tahun</strong></td>
+                            <td style='text-align: right;'><strong>9.926.375</strong></td>
+                            
+                          </tr><tr style='background-color: #e6e6e6;'>
+                            <td colspan='6'><strong>Bendahara</strong></td>
+                          </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-01-05</td>
+                                <td>Iuran Warga - Jan'25</td>
+                                <td style='text-align: right;'>1.555.000</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>1.555.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-01-05</td>
+                                <td>Uang Meja- Bpk Sukardi (Ira)</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>200.000</td>
+                                <td style='text-align: right;'>1.355.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-01-05</td>
+                                <td>Pembayaran RUKEM Jan'25</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>250.000</td>
+                                <td style='text-align: right;'>1.105.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-01-05</td>
+                                <td>Pemindahan Dana ke SARPRAS</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>225.000</td>
+                                <td style='text-align: right;'>880.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-01-05</td>
+                                <td>Pemindahan Dana ke SOSIAL</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>225.000</td>
+                                <td style='text-align: right;'>655.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-02-02</td>
+                                <td>Uang Meja - Bpk Ilham</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>200.000</td>
+                                <td style='text-align: right;'>455.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-02-02</td>
+                                <td>Pemindahan Dana ke SARPRAS</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>200.000</td>
+                                <td style='text-align: right;'>255.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-02-02</td>
+                                <td>Pembayaran RUKEM Bulan Feb & Mar '25</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>500.000</td>
+                                <td style='text-align: right;'>-245.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-02-02</td>
+                                <td>Pemindahan Dana Ke SARPRAS Bpk. Sukardi(Ira)</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>2.000.000</td>
+                                <td style='text-align: right;'>-2.245.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-02-02</td>
+                                <td>Iuran Warga -FEB '25 </td>
+                                <td style='text-align: right;'>1.335.000</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>-910.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-03-09</td>
+                                <td>Iuran Warga Mar'25</td>
+                                <td style='text-align: right;'>2.015.000</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>1.105.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-04-15</td>
+                                <td>Iuran warga - APRIL '25</td>
+                                <td style='text-align: right;'>1.215.000</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>-2.180.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-04-20</td>
+                                <td>Pembayaran RUKEM periode April dan Mei 2025</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>500.000</td>
+                                <td style='text-align: right;'>-2.680.000</td>
+                                
+                              </tr><tr>
+                                <td style='text-align: center; white-space: nowrap;'>2025-04-20</td>
+                                <td>Pembayaran IURAN RW 3 bulan( Feb, Mar, April 2025) dan Pembayaran Uang Meja RW</td>
+                                <td style='text-align: right;'>-</td>
+                                <td style='text-align: right;'>100.000</td>
+                                <td style='text-align: right;'>-2.780.000</td>
+                                
+                              </tr><tr style='background-color: #d3d3d3;'>
+                            <td colspan='2'><strong>Total Kas - Bendahara</strong></td>
+                            <td style='text-align: right;'><strong>6.120.000</strong></td>
+                            <td style='text-align: right;'><strong>8.900.000</strong></td>
+                            <td style='text-align: right;'><strong>-2.780.000</strong></td>
+                            
+                          </tr>         </tbody>
+    </table> 
+    <p style="text-align: left; font-size: 12px; font-style: italic;">*Data laporan keuangan dibuat oleh Bendahara dan dikonfirmasi oleh Ketua RT</p>
+    <div style="margin-top: 20px;">
+   
+
+    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+    <div style="text-align: center; margin-left: 5%;">
+        <p style="font-size: 0.9em;">Bendahara</p>
+        <p style="font-weight: bold; font-size: 0.9em;">Tri Afandi</p>
+        <p style="margin-top: -10px; font-size: 10px;"><i class="fab fa-whatsapp"></i> 0819 0438 8602</p>
+    </div>
+    <div style="text-align: center; margin-left: 5%;">
+        <p style="font-size: 0.9em;">Sarpras</p>
+        <p style="font-weight: bold; font-size: 0.9em;">Sukardi</p>
+        <p style="margin-top: -10px; font-size: 10px;"><i class="fab fa-whatsapp"></i> 0856 4166 3644</p>
+    </div>
+    <div style="text-align: center; margin-right: 5%;">
+        <p style="font-size: 0.9em;">Sosial</p>
+        <p style="font-weight: bold; font-size: 0.9em;">Budi Haryanto</p>
+        <p style="margin-top: -10px; font-size: 10px;"><i class="fab fa-whatsapp"></i> 0882 1543 1058</p>
+    </div>
+    
+</div>
+<hr>
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+    <div style="text-align: center;">
+        <p style="font-size: 0.9em;">Mengetahui, <br> Ketua RT</p>
+        <p style="font-weight: bold; font-size: 0.9em;">Sunu Aji Pramuji</p>
+        <p style="margin-top: -10px; font-size: 10px;"><i class="fab fa-whatsapp"></i> 087876868828</p>
+    </div>
+</div>
+
+    </div>
+    
+</div>
+<div style="padding-bottom: 100px;"></div>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+</div>
+</div>
+<div style="padding-bottom: 20px;"></div>
+<div class="footer">
+        <a href="warga.html" class="footer-item">
+            <div class="footer-icon"><i class="fas fa-home"></i></div>
+            <div class="footer-text">Beranda</div>
+        </a>
+                
+        <a href="laporan.html" class="footer-item">
+            <div class="footer-icon"><i class="fas fa-chart-bar"></i></div>
+            <div class="footer-text">Laporan</div>
+        </a>
+    </div>
+    <script>
+    let timeout; // Variabel untuk menyimpan timer
+
+    function resetTimer() {
+        clearTimeout(timeout); // Hapus timer yang ada
+        timeout = setTimeout(() => {
+            window.location.href = 'logout.php'; // Arahkan ke halaman logout setelah 10 menit
+        }, 1200000); // 600000 ms = 20 menit
+    }
+
+    document.addEventListener('mousemove', resetTimer);
+    document.addEventListener('keypress', resetTimer);
+    document.addEventListener('click', resetTimer);
+    document.addEventListener('scroll', resetTimer);
+
+    // Inisialisasi timer saat halaman dimuat
+        resetTimer();
+    </script>          
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const body = document.body;
+
+        sidebarToggle.addEventListener('click', () => {
+            if (window.innerWidth >= 768) {
+                body.classList.toggle('sidebar-collapsed');
+            } else {
+                body.classList.toggle('sidebar-active');
+            }
+        });
+
+        // Menutup sidebar saat mengklik di luar sidebar pada tampilan mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 767 && !sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+                body.classList.remove('sidebar-active');
+            }
+        });
+    </script><script>
+const tabItems = document.querySelectorAll('.tab-item');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabItems.forEach(item => {
+    item.addEventListener('click', () => {
+        tabItems.forEach(i => i.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        item.classList.add('active');
+        const target = item.getAttribute('data-target');
+        document.querySelector(target).classList.add('active');
+    });
+});
+
+function confirmDelete(keterangan) {
+    return confirm("Apakah Anda yakin ingin menghapus \"" + keterangan + "\" ini?");
+}
+
+function loadData(button) {
+    const buttons = document.querySelectorAll('.year-button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    const selectedYear = button.getAttribute('data-year');
+    document.getElementById('tahun-input').value = selectedYear;
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'get_data_laporan.php?year=' + selectedYear + '&uraian=Bendahara', true);
+    xhr.onload = function() {
+        if (this.status === 200) {
+            document.getElementById('data-container').innerHTML = this.responseText;
+        } else {
+            console.error('Error fetching data');
+        }
+    };
+    xhr.send();
+}
+</script>
+</body>
+</html>
